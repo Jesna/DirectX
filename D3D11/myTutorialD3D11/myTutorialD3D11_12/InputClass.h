@@ -12,5 +12,5 @@ public:
 	bool IsKeyDown(unsigned int);
 
 private:
-	bool m_keys[256];		//ÓÃÀ´´æ·Å256¸öĞéÄâ¼üÊÇ·ñ±»°´ÏÂ 
+	bool m_keys[256];		//ç”¨æ¥å­˜æ”¾256ä¸ªè™šæ‹Ÿé”®æ˜¯å¦è¢«æŒ‰ä¸‹ 
 };

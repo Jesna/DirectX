@@ -2,10 +2,10 @@
 
 #include <windows.h>
 
-const bool FULL_SCREEN = false;			//ÊÇ·ñÈ«ÆÁ
-const bool VSYNC_ENABLED = true;	//ÊÇ·ñ´¹Ö±Í¬²½
-const float SCREEN_DEPTH = 1000.0f;	//Éî¶È£¬Ô¶µã
-const float SCREEN_NEAR = 1.0f;			//Éî¶È£¬½üµã
+const bool FULL_SCREEN = false;			//æ˜¯å¦å…¨å±
+const bool VSYNC_ENABLED = true;	//æ˜¯å¦å‚ç›´åŒæ­¥
+const float SCREEN_DEPTH = 1000.0f;	//æ·±åº¦ï¼Œè¿œç‚¹
+const float SCREEN_NEAR = 1.0f;			//æ·±åº¦ï¼Œè¿‘ç‚¹
 
 class GraphicsClass
 {

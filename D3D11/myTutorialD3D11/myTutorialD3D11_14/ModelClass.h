@@ -22,7 +22,7 @@ public:
 	void Render(ID3D11DeviceContext*);
 	
 	int GetIndexCount();
-	/*¸ù¾İ¶¥µãµÄxÖµºÍzÖµ£¬¼ÆËã³öyÖµ*/
+	/*æ ¹æ®é¡¶ç‚¹çš„xå€¼å’Œzå€¼ï¼Œè®¡ç®—å‡ºyå€¼*/
 	float getHeight(float x, float z) const;
 
 private:
@@ -31,7 +31,7 @@ private:
 	void RenderBuffers(ID3D11DeviceContext*);
 
 private:
-	//¶¥µã»º³åºÍ¶¥µãË÷Òı»º³å
+	//é¡¶ç‚¹ç¼“å†²å’Œé¡¶ç‚¹ç´¢å¼•ç¼“å†²
 	ID3D11Buffer* m_vertexBuffer, *m_indexBuffer;
 	int m_vertexCount, m_indexCount;
 };

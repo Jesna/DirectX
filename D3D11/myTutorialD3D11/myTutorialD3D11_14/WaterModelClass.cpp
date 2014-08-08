@@ -22,7 +22,7 @@ bool WaterModelClass::Initialize(ID3D11Device* device, int m, int n, float dx, f
 {
 	bool result;
 
-	// ³õÊ¼»¯¶¥µã»º³åºÍ¶¥µãË÷Òı»º³å
+	// åˆå§‹åŒ–é¡¶ç‚¹ç¼“å†²å’Œé¡¶ç‚¹ç´¢å¼•ç¼“å†²
 	result = InitializeBuffers(device, m, n, dx, dt, speed, damping);
 	if(!result)
 		return false;
@@ -32,23 +32,23 @@ bool WaterModelClass::Initialize(ID3D11Device* device, int m, int n, float dx, f
 
 void WaterModelClass::Shutdown()
 {
-	// ÊÍ·Å¶¥µãºÍË÷Òı»º³å
+	// é‡Šæ”¾é¡¶ç‚¹å’Œç´¢å¼•ç¼“å†²
 	ShutdownBuffers();
 }
 
 void WaterModelClass::Render(ID3D11DeviceContext* deviceContext)
 {
-	// °Ñ¶¥µãºÍË÷Òı»º³å·ÅÈëÍ¼ĞÎ¹ÜÏß£¬×¼±¸äÖÈ¾
+	// æŠŠé¡¶ç‚¹å’Œç´¢å¼•ç¼“å†²æ”¾å…¥å›¾å½¢ç®¡çº¿ï¼Œå‡†å¤‡æ¸²æŸ“
 	RenderBuffers(deviceContext);
 }
 
 int WaterModelClass::GetIndexCount()
 {
-	//·µ»ØË÷Òı¶¥µã¼ÆÊı
+	//è¿”å›ç´¢å¼•é¡¶ç‚¹è®¡æ•°
 	return m_indexCount;
 }
 
-//damping±íÊ¾×èÄáÏµÊı
+//dampingè¡¨ç¤ºé˜»å°¼ç³»æ•°
 bool WaterModelClass::InitializeBuffers(ID3D11Device* device, int m, int n, float dx, float dt, float speed, float damping)
 {
 	unsigned long* indices;
@@ -59,7 +59,7 @@ bool WaterModelClass::InitializeBuffers(ID3D11Device* device, int m, int n, floa
 	m_NumRows = m;
 	m_NumCols = n;
 
-	//Ê×ÏÈµÃµ½Èı½ÇĞÎµÄÊıÄ¿£¬È»ºó³ËÒÔ3¾ÍÊÇ¶¥µãË÷ÒıÊıÄ¿
+	//é¦–å…ˆå¾—åˆ°ä¸‰è§’å½¢çš„æ•°ç›®ï¼Œç„¶åä¹˜ä»¥3å°±æ˜¯é¡¶ç‚¹ç´¢å¼•æ•°ç›®
 	m_vertexCount = m * n;
 	m_indexCount = (m - 1) * (n - 1) * 2 * 3;
 
@@ -89,29 +89,29 @@ bool WaterModelClass::InitializeBuffers(ID3D11Device* device, int m, int n, floa
 		}
 	}
 
-	//Èç¹û¶¥µãÁÙÊ±»º³å²»Îª¿Õ£¬ÏÈÊÍ·Å
+	//å¦‚æœé¡¶ç‚¹ä¸´æ—¶ç¼“å†²ä¸ä¸ºç©ºï¼Œå…ˆé‡Šæ”¾
 	if(vertices)
 	{
-		// ÊÍ·ÅÁÙÊ±»º³å
+		// é‡Šæ”¾ä¸´æ—¶ç¼“å†²
 		delete[] vertices;
 		vertices = nullptr;
 	}
 
-	// ´´½¨¶¥µãÁÙÊ±»º³å.
+	// åˆ›å»ºé¡¶ç‚¹ä¸´æ—¶ç¼“å†².
 	vertices = new VertexType[m_vertexCount];
 	if(!vertices)
 	{
 		return false;
 	}
 
-	// ´´½¨Ë÷Òı»º³å.
+	// åˆ›å»ºç´¢å¼•ç¼“å†².
 	indices = new unsigned long[m_indexCount];
 	if(!indices)
 	{
 		return false;
 	}
 
-	// µü´úÃ¿¸ögrid£¬¼ÆËãµÃ³öË÷Òı.
+	// è¿­ä»£æ¯ä¸ªgridï¼Œè®¡ç®—å¾—å‡ºç´¢å¼•.
 	int k = 0;
 	for(int i = 0; i < m-1; ++i)
 	{
@@ -125,22 +125,22 @@ bool WaterModelClass::InitializeBuffers(ID3D11Device* device, int m, int n, floa
 			indices[k + 4] = i * n + j + 1;
 			indices[k + 5] = (i + 1) * n + j + 1;
 
-			k += 6; //ÏÂÒ»¸ögrid
+			k += 6; //ä¸‹ä¸€ä¸ªgrid
 		}
 	}
 
-	// ÉèÖÃ¶¥µã»º³åÃèÊö£¬¶¯Ì¬»º³å
+	// è®¾ç½®é¡¶ç‚¹ç¼“å†²æè¿°ï¼ŒåŠ¨æ€ç¼“å†²
 	vertexBufferDesc.Usage = D3D11_USAGE_DYNAMIC;
 	vertexBufferDesc.ByteWidth = sizeof(VertexType) * m_vertexCount;
 	vertexBufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
 	vertexBufferDesc.CPUAccessFlags =D3D11_CPU_ACCESS_WRITE;
 	vertexBufferDesc.MiscFlags = 0;
 	vertexBufferDesc.StructureByteStride = 0;
-	// Ö¸Ïò±£´æ¶¥µãÊı¾İµÄÁÙÊ±»º³å.
+	// æŒ‡å‘ä¿å­˜é¡¶ç‚¹æ•°æ®çš„ä¸´æ—¶ç¼“å†².
 	vertexData.pSysMem = vertices;
 	vertexData.SysMemPitch = 0;
 	vertexData.SysMemSlicePitch = 0;
-	// ´´½¨¶¥µã»º³å
+	// åˆ›å»ºé¡¶ç‚¹ç¼“å†²
 	result = device->CreateBuffer(&vertexBufferDesc,&vertexData, &m_vertexBuffer);
 	if(FAILED(result))
 	{
@@ -148,20 +148,20 @@ bool WaterModelClass::InitializeBuffers(ID3D11Device* device, int m, int n, floa
 		return false;
 	}
 
-	// ÉèÖÃË÷Òı»º³åÃèÊö.
-	indexBufferDesc.Usage = D3D11_USAGE_IMMUTABLE; //´´½¨ºó×ÊÔ´´Ó²»±ä»¯£¬ÏµÍ³¿ÉÄÜ»áÓĞÓÅ»¯²Ù×÷
+	// è®¾ç½®ç´¢å¼•ç¼“å†²æè¿°.
+	indexBufferDesc.Usage = D3D11_USAGE_IMMUTABLE; //åˆ›å»ºåèµ„æºä»ä¸å˜åŒ–ï¼Œç³»ç»Ÿå¯èƒ½ä¼šæœ‰ä¼˜åŒ–æ“ä½œ
 	indexBufferDesc.ByteWidth = sizeof(unsigned long) * m_indexCount;
 	indexBufferDesc.BindFlags = D3D11_BIND_INDEX_BUFFER;
 	indexBufferDesc.CPUAccessFlags = 0;
 	indexBufferDesc.MiscFlags = 0;
 	indexBufferDesc.StructureByteStride = 0;
 
-	// Ö¸Ïò´æÁÙÊ±Ë÷Òı»º³å.
+	// æŒ‡å‘å­˜ä¸´æ—¶ç´¢å¼•ç¼“å†².
 	indexData.pSysMem = indices;
 	indexData.SysMemPitch = 0;
 	indexData.SysMemSlicePitch = 0;
 
-	// ´´½¨Ë÷Òı»º³å.
+	// åˆ›å»ºç´¢å¼•ç¼“å†².
 	result = device->CreateBuffer(&indexBufferDesc, &indexData, &m_indexBuffer);
 	if(FAILED(result))
 	{
@@ -177,21 +177,21 @@ bool WaterModelClass::InitializeBuffers(ID3D11Device* device, int m, int n, floa
 
 void WaterModelClass::ShutdownBuffers()
 {
-	// ÊÍ·Å¶¥µã»º³å.
+	// é‡Šæ”¾é¡¶ç‚¹ç¼“å†².
 	if(m_indexBuffer)
 	{
 		m_indexBuffer->Release();
 		m_indexBuffer = nullptr;
 	}
 
-	// ÊÍ·ÅË÷Òı»º³å
+	// é‡Šæ”¾ç´¢å¼•ç¼“å†²
 	if(m_vertexBuffer)
 	{
 		m_vertexBuffer->Release();
 		m_vertexBuffer = nullptr;
 	}
 
-	//ÊÍ·Åwater¶¥µãÎ»ÖÃ
+	//é‡Šæ”¾wateré¡¶ç‚¹ä½ç½®
 	if(mPrevSolution)
 	{
 		delete[] mPrevSolution;
@@ -206,7 +206,7 @@ void WaterModelClass::ShutdownBuffers()
 
 	if(vertices)
 	{
-		// ÊÍ·ÅÁÙÊ±»º³å.
+		// é‡Šæ”¾ä¸´æ—¶ç¼“å†².
 		delete[] vertices;
 		vertices = 0;
 	}
@@ -218,17 +218,17 @@ void WaterModelClass::RenderBuffers(ID3D11DeviceContext* deviceContext)
 	unsigned int offset;
 
 
-	// ÉèÖÃ¶¥µã»º³å¿ç¶ÈºÍÆ«ÒÆ.
+	// è®¾ç½®é¡¶ç‚¹ç¼“å†²è·¨åº¦å’Œåç§».
 	stride = sizeof(VertexType); 
 	offset = 0;
 
-	//ÔÚinput assemberl½×¶Î°ó¶¨¶¥µã»º³å£¬ÒÔ±ãÄÜ¹»±»äÖÈ¾
+	//åœ¨input assemberlé˜¶æ®µç»‘å®šé¡¶ç‚¹ç¼“å†²ï¼Œä»¥ä¾¿èƒ½å¤Ÿè¢«æ¸²æŸ“
 	deviceContext->IASetVertexBuffers(0, 1, &m_vertexBuffer, &stride, &offset);
 
-	//ÔÚinput assemberl½×¶Î°ó¶¨Ë÷Òı»º³å£¬ÒÔ±ãÄÜ¹»±»äÖÈ¾
+	//åœ¨input assemberlé˜¶æ®µç»‘å®šç´¢å¼•ç¼“å†²ï¼Œä»¥ä¾¿èƒ½å¤Ÿè¢«æ¸²æŸ“
 	deviceContext->IASetIndexBuffer(m_indexBuffer, DXGI_FORMAT_R32_UINT, 0);
 
-	// ÉèÖÃÌåÔªÓïÒå£¬äÖÈ¾Èı½ÇĞÎÁĞ±í.
+	// è®¾ç½®ä½“å…ƒè¯­ä¹‰ï¼Œæ¸²æŸ“ä¸‰è§’å½¢åˆ—è¡¨.
 	deviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 }
 
@@ -236,19 +236,19 @@ bool WaterModelClass::update(ID3D11DeviceContext* deviceContext, float dt)
 {
 	static float t = 0;
 
-	// ÀÛ¼ÓÊ±¼ä
+	// ç´¯åŠ æ—¶é—´
 	t += dt;
 
-	// ÔÚÖ¸¶¨µÄÊ±¼äµã¸üĞÂÄ£Äâ
+	// åœ¨æŒ‡å®šçš„æ—¶é—´ç‚¹æ›´æ–°æ¨¡æ‹Ÿ
 	if(t >= mTimeStep)
 	{
-		// ½ö¸üĞÂµü´úµã
+		// ä»…æ›´æ–°è¿­ä»£ç‚¹
 		for (int i = 1; i < m_NumRows - 1; ++i)
 		{
 			for (int j = 1; j < m_NumCols - 1; ++j)
 			{
-				//¸üĞÂºó£¬·ÅÆúmPrevSolutionÄÚÈİ£¬ÓÃĞÂ²úÉúµÄ»º³å¸²¸ÇËü
-				//jË÷Òıx£¬iË÷Òız
+				//æ›´æ–°åï¼Œæ”¾å¼ƒmPrevSolutionå†…å®¹ï¼Œç”¨æ–°äº§ç”Ÿçš„ç¼“å†²è¦†ç›–å®ƒ
+				//jç´¢å¼•xï¼Œiç´¢å¼•z
 				mPrevSolution[i * m_NumCols + j].y = 
 					mK1 * mPrevSolution[i * m_NumCols + j].y + 
 					mK2 * mCurrSolution[i * m_NumCols + j].y +
@@ -259,13 +259,13 @@ bool WaterModelClass::update(ID3D11DeviceContext* deviceContext, float dt)
 			}
 		}
 
-		//½»»»»º³å
+		//äº¤æ¢ç¼“å†²
 		swap(mPrevSolution, mCurrSolution);
 
-		// ¸´Î»Ê±¼ä
+		// å¤ä½æ—¶é—´
 		t = 0.0f;
 
-		// ¸üĞÂ¶¥µã»º³å
+		// æ›´æ–°é¡¶ç‚¹ç¼“å†²
 		for (int i = 0; i < m_vertexCount; ++i)
 		{
 			vertices[i].position = mCurrSolution[i];
@@ -276,7 +276,7 @@ bool WaterModelClass::update(ID3D11DeviceContext* deviceContext, float dt)
 		VertexType* verticesPtr;
 		HRESULT result;
 
-		// Ëø¶¨¶¥µã»º³åÒÔ±ãÄÜĞ´
+		// é”å®šé¡¶ç‚¹ç¼“å†²ä»¥ä¾¿èƒ½å†™
 		result = deviceContext->Map(m_vertexBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource);
 		if(FAILED(result))
 		{
@@ -284,13 +284,13 @@ bool WaterModelClass::update(ID3D11DeviceContext* deviceContext, float dt)
 			return false;
 		}
 
-		// µÃµ½Ò»¸ö¶¥µã»º³åµÄÖ¸Õë
+		// å¾—åˆ°ä¸€ä¸ªé¡¶ç‚¹ç¼“å†²çš„æŒ‡é’ˆ
 		verticesPtr = (VertexType*)mappedResource.pData;
 
-		// °ÑĞÂÉú³ÉµÄ¶¥µãÊı¾İ¿½±´µ½¶¥µã»º³å
+		// æŠŠæ–°ç”Ÿæˆçš„é¡¶ç‚¹æ•°æ®æ‹·è´åˆ°é¡¶ç‚¹ç¼“å†²
 		memcpy(verticesPtr, (void*)vertices, sizeof(VertexType) * m_vertexCount);
 
-		// ½âËø¶¥µã»º³å
+		// è§£é”é¡¶ç‚¹ç¼“å†²
 		deviceContext->Unmap(m_vertexBuffer, 0);
 	}
 
@@ -299,13 +299,13 @@ bool WaterModelClass::update(ID3D11DeviceContext* deviceContext, float dt)
 
 void WaterModelClass::disturb(int i, int j, float magnitude)
 {
-	// ²»ÔÚ±ß½ç´¦ÈÅ¶¯
+	// ä¸åœ¨è¾¹ç•Œå¤„æ‰°åŠ¨
 	assert(i > 1 && i < m_NumRows - 2);
 	assert(j > 1 && j < m_NumCols - 2);
 
 	float halfMag = 0.5f * magnitude;
 
-	// ÈÅ¶¯µÚij¸ö¶¥µãµÄ¸ß¶ÈºÍËüµÄÁÚ½Óµã
+	// æ‰°åŠ¨ç¬¬ijä¸ªé¡¶ç‚¹çš„é«˜åº¦å’Œå®ƒçš„é‚»æ¥ç‚¹
 	mCurrSolution[i * m_NumCols + j].y += magnitude;
 	mCurrSolution[i * m_NumCols + j + 1].y += halfMag;
 	mCurrSolution[i * m_NumCols + j - 1].y += halfMag;

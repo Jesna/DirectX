@@ -1,6 +1,6 @@
 // GLOBALS //
-//shaderÖĞÊ¹ÓÃµÄÈ«¾Ö±äÁ¿¶¼ÔÚ¶¨ÒåÔÚconst bufferÖĞ
-//ÕâÑùshader±àÒëºó£¬ÕâĞ©±äÁ¿·ÅÔÚgpuµÄconst bufferÖĞ
+//shaderä¸­ä½¿ç”¨çš„å…¨å±€å˜é‡éƒ½åœ¨å®šä¹‰åœ¨const bufferä¸­
+//è¿™æ ·shaderç¼–è¯‘åï¼Œè¿™äº›å˜é‡æ”¾åœ¨gpuçš„const bufferä¸­
 cbuffer MatrixBuffer
 {
 	matrix worldMatrix;
@@ -9,7 +9,7 @@ cbuffer MatrixBuffer
 };
 
 // TYPEDEFS //
-//×¢Òâ£ºPOSITION, COLORµÈÊÇÎÒÃÇÔÚ¶¨Òå¶¥µã²¼¾ÖÖĞ¶¨ÒåÃû×Ö¡£
+//æ³¨æ„ï¼šPOSITION, COLORç­‰æ˜¯æˆ‘ä»¬åœ¨å®šä¹‰é¡¶ç‚¹å¸ƒå±€ä¸­å®šä¹‰åå­—ã€‚
 struct VertexInputType
 {
 	float4 position : POSITION;
@@ -18,7 +18,7 @@ struct VertexInputType
 
 struct PixelInputType
 {
-	float4 position : SV_POSITION;		//SV±íÊ¾ÏµÍ³×Ô¶¯¶¨ÒåµÄ¸ñÊ½¡£
+	float4 position : SV_POSITION;		//SVè¡¨ç¤ºç³»ç»Ÿè‡ªåŠ¨å®šä¹‰çš„æ ¼å¼ã€‚
 	float4 color : COLOR;
 };
 
@@ -27,15 +27,15 @@ PixelInputType ColorVertexShader(VertexInputType input)
 {
 	PixelInputType output;
 
-	//¶¥µã×ø±êÀ©Õ¹³ÉËÄ¸ö·ÖÁ¿£¬²¢ÉèÖÃÎª1£¬ÒÔ±ã¾ØÕóÔËËã
+	//é¡¶ç‚¹åæ ‡æ‰©å±•æˆå››ä¸ªåˆ†é‡ï¼Œå¹¶è®¾ç½®ä¸º1ï¼Œä»¥ä¾¿çŸ©é˜µè¿ç®—
 	input.position.w = 1.0f;
 
-	// ³ËÒÔ3¸ö¾ØÕó£¬µÃµ½clip¿Õ¼äµÄ×ø±ê¡£
+	// ä¹˜ä»¥3ä¸ªçŸ©é˜µï¼Œå¾—åˆ°clipç©ºé—´çš„åæ ‡ã€‚
 	output.position = mul(input.position, worldMatrix);
 	output.position = mul(output.position, viewMatrix);
 	output.position = mul(output.position, projectionMatrix);
 
-	//Ö±½ÓÊä³ö¶¥µãµÄÑÕÉ«£¨¶¥µãÖ®¼äµÄÑÕÉ«£¬»áÔÚ¹âÕ¤»¯½×¶Î²ÉÓÃ²åÖµµÄ·½Ê½¼ÆËã£©
+	//ç›´æ¥è¾“å‡ºé¡¶ç‚¹çš„é¢œè‰²ï¼ˆé¡¶ç‚¹ä¹‹é—´çš„é¢œè‰²ï¼Œä¼šåœ¨å…‰æ …åŒ–é˜¶æ®µé‡‡ç”¨æ’å€¼çš„æ–¹å¼è®¡ç®—ï¼‰
 	output.color = input.color;
 
 	return output;

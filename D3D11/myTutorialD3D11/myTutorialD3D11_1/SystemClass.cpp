@@ -14,12 +14,12 @@ SystemClass::~SystemClass(void)
 {
 }
 
-//µ÷ÓÃ´°¿Ú³õÊ¼»¯º¯ÊıºÍÆäËüÒ»Ğ©ÀàµÄ³õÊ¼»¯º¯Êı 
+//è°ƒç”¨çª—å£åˆå§‹åŒ–å‡½æ•°å’Œå…¶å®ƒä¸€äº›ç±»çš„åˆå§‹åŒ–å‡½æ•° 
 bool SystemClass::Initialize()
 {
 	int screenWidth = 0, screenHeight = 0;
 
-	 // ³õÊ¼»¯´°¿Ú 
+	 // åˆå§‹åŒ–çª—å£ 
 	InitializeWindows(screenWidth, screenHeight);
 
 	return true;
@@ -27,35 +27,35 @@ bool SystemClass::Initialize()
 
 void SystemClass::ShutDown()
 {
-	// Ö´ĞĞ´°¿ÚÒ»Ğ©Ïú»Ù¹¤×÷
+	// æ‰§è¡Œçª—å£ä¸€äº›é”€æ¯å·¥ä½œ
 	ShutdownWindows();
 }
 
-//´¦ÀíÏûÏ¢ 
+//å¤„ç†æ¶ˆæ¯ 
 void SystemClass::Run()
 {
 	MSG msg;
 	bool done = false, result = true;
 
-	// ³õÊ¼»¯ÏûÏ¢½á¹¹
+	// åˆå§‹åŒ–æ¶ˆæ¯ç»“æ„
 	ZeroMemory(&msg, sizeof(MSG));
 
-	// Ñ­»·½øĞĞÏûÏ¢´¦Àí
+	// å¾ªç¯è¿›è¡Œæ¶ˆæ¯å¤„ç†
 	while (!done)
 	{
-		// ´¦ÀíwindowsÏûÏ¢
+		// å¤„ç†windowsæ¶ˆæ¯
 		if(PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
 		{
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
 		}
 
-		// ½ÓÊÕµ½WM_QUITÏûÏ¢£¬ÍË³ö³ÌĞò
+		// æ¥æ”¶åˆ°WM_QUITæ¶ˆæ¯ï¼Œé€€å‡ºç¨‹åº
 		if(msg.message == WM_QUIT)
 			done = true;
 		else
 		{
-			//Èç¹û°´ÁËESC,Ò²ÍË³ö³ÌĞò
+			//å¦‚æœæŒ‰äº†ESC,ä¹Ÿé€€å‡ºç¨‹åº
 			result = bexit;
 			Frame();
 			if(result)
@@ -69,21 +69,21 @@ bool SystemClass::Frame()
 	return true;
 }
 
-//³õÊ¼»¯´°¿ÚÀà£¬´´½¨Ó¦ÓÃ³ÌĞò´°¿Ú 
+//åˆå§‹åŒ–çª—å£ç±»ï¼Œåˆ›å»ºåº”ç”¨ç¨‹åºçª—å£ 
 void SystemClass::InitializeWindows(int& screenWidth, int& screenHeight)
 {
 	WNDCLASSEX wc;
 	DEVMODE dmScreenSettings;
 	int posX, posY;
 
-	//»ñÈ¡System class¶ÔÏó
+	//è·å–System classå¯¹è±¡
 	ApplicationHandle = this;
-	// µÃµ½Ó¦ÓÃ³ÌĞòÊµÀı¾ä±ú 
+	// å¾—åˆ°åº”ç”¨ç¨‹åºå®ä¾‹å¥æŸ„ 
 	m_hinstance = GetModuleHandle(nullptr);
-	// Ó¦ÓÃ³ÌĞòÃû×Ö 
+	// åº”ç”¨ç¨‹åºåå­— 
 	m_applicationName = TEXT("Engine");
 
-	// ÉèÖÃ´°¿ÚÀà²ÎÊı.
+	// è®¾ç½®çª—å£ç±»å‚æ•°.
 	wc.style = CS_HREDRAW | CS_VREDRAW | CS_OWNDC;
 	wc.lpfnWndProc = WndProc;
 	wc.cbClsExtra = 0;
@@ -97,17 +97,17 @@ void SystemClass::InitializeWindows(int& screenWidth, int& screenHeight)
 	wc.lpszClassName = m_applicationName;
 	wc.cbSize = sizeof(WNDCLASSEX);
 
-	// ×¢²á´°¿ÚÀà 
+	// æ³¨å†Œçª—å£ç±» 
 	RegisterClassEx(&wc);
 
-	// µÃµ½windows×ÀÃæ·Ö±æÂÊ 
+	// å¾—åˆ°windowsæ¡Œé¢åˆ†è¾¨ç‡ 
 	screenWidth = GetSystemMetrics(SM_CXSCREEN);
 	screenHeight = GetSystemMetrics(SM_CYSCREEN);
 
-	// ¸ù¾İÊÇ·ñÈ«ÆÁÉèÖÃ²»Í¬µÄ·Ö±æÂÊ
+	// æ ¹æ®æ˜¯å¦å…¨å±è®¾ç½®ä¸åŒçš„åˆ†è¾¨ç‡
 	if(FULL_SCREEN)
 	{
-		//È«ÆÁÄ£Ê½ÏÂ£¬ÉèÖÃ´°¿Ú´óĞ¡Îªwindows×ÀÃæ·Ö±æÂÊ
+		//å…¨å±æ¨¡å¼ä¸‹ï¼Œè®¾ç½®çª—å£å¤§å°ä¸ºwindowsæ¡Œé¢åˆ†è¾¨ç‡
 		memset(&dmScreenSettings, 0, sizeof(dmScreenSettings));
 		dmScreenSettings.dmSize = sizeof(dmScreenSettings);
 		dmScreenSettings.dmPelsWidth = (DWORD)screenWidth;
@@ -115,24 +115,24 @@ void SystemClass::InitializeWindows(int& screenWidth, int& screenHeight)
 		dmScreenSettings.dmBitsPerPel = 32;
 		dmScreenSettings.dmFields = DM_BITSPERPEL | DM_PELSWIDTH | DM_PELSHEIGHT;
 
-		// ÁÙÊ±ÉèÖÃÏÔÊ¾Éè±¸ÎªÈ«ÆÁÄ£Ê½£¬×¢Òâ£ºÓ¦ÓÃ³ÌĞòÍË³öÊ±ºò£¬½«»Ö¸´ÏµÍ³Ä¬ÈÏÉèÖÃ
+		// ä¸´æ—¶è®¾ç½®æ˜¾ç¤ºè®¾å¤‡ä¸ºå…¨å±æ¨¡å¼ï¼Œæ³¨æ„ï¼šåº”ç”¨ç¨‹åºé€€å‡ºæ—¶å€™ï¼Œå°†æ¢å¤ç³»ç»Ÿé»˜è®¤è®¾ç½®
 		ChangeDisplaySettings(&dmScreenSettings, CDS_FULLSCREEN);
 
-		// ÉèÖÃ´°¿ÚµÄ×óÉÏ½Ç×ø±êÎ»ÖÃÎª(0,0)
+		// è®¾ç½®çª—å£çš„å·¦ä¸Šè§’åæ ‡ä½ç½®ä¸º(0,0)
 		posX = posY = 0;
 	}
 	else
 	{
-		// ´°¿ÚÄ£Ê½£º800*600
+		// çª—å£æ¨¡å¼ï¼š800*600
 		screenWidth = 800;
 		screenHeight = 600;
 
-		// ´°¿Ú×óÉÏ½Ç×ø±êÎ»ÖÃ,posX, posY
+		// çª—å£å·¦ä¸Šè§’åæ ‡ä½ç½®,posX, posY
 		posX = (GetSystemMetrics(SM_CXSCREEN) - screenWidth) / 2;
 		posY = (GetSystemMetrics(SM_CYSCREEN) - screenHeight) / 2;
 	}
 
-	// È«ÆÁºÍ´°¿ÚÊ¹ÓÃ²»Í¬µÄ²ÎÊı. 
+	// å…¨å±å’Œçª—å£ä½¿ç”¨ä¸åŒçš„å‚æ•°. 
 	if(FULL_SCREEN)
 	{
 		m_hwnd = CreateWindowEx(WS_EX_APPWINDOW, m_applicationName, m_applicationName, 
@@ -146,29 +146,29 @@ void SystemClass::InitializeWindows(int& screenWidth, int& screenHeight)
 			nullptr, nullptr, m_hinstance, nullptr);
 	}
 
-	// ÏÔÊ¾´°¿Ú²¢ÉèÖÃÆäÎª½¹µã. 
+	// æ˜¾ç¤ºçª—å£å¹¶è®¾ç½®å…¶ä¸ºç„¦ç‚¹. 
 	ShowWindow(m_hwnd, SW_SHOW);
 	SetForegroundWindow(m_hwnd);
 	SetFocus(m_hwnd);
 
-	//Òş²ØÊó±ê
+	//éšè—é¼ æ ‡
 	ShowCursor(FALSE);
 }
 
 void SystemClass::ShutdownWindows()
 {
-	//ÏÔÊ¾¹â±ê
+	//æ˜¾ç¤ºå…‰æ ‡
 	ShowCursor(true);
 
-	// »Ö¸´Ä¬ÈÏÏÔÊ¾ÉèÖÃ
+	// æ¢å¤é»˜è®¤æ˜¾ç¤ºè®¾ç½®
 	if(FULL_SCREEN)
 		ChangeDisplaySettings(nullptr, 0);
 
-	//ÊÍ·Å´°¿Ú¾ä±ú
+	//é‡Šæ”¾çª—å£å¥æŸ„
 	DestroyWindow(m_hwnd);
 	m_hwnd = nullptr;
 
-	// ÊÍ·ÅÓ¦ÓÃ³ÌĞòÊµÀı
+	// é‡Šæ”¾åº”ç”¨ç¨‹åºå®ä¾‹
 	UnregisterClass(m_applicationName, m_hinstance);
 	m_hinstance = nullptr;
 	ApplicationHandle = nullptr;
@@ -178,12 +178,12 @@ LRESULT CALLBACK SystemClass::MessageHandler(HWND hwnd, UINT umsg, WPARAM wparam
 {
 	switch (umsg)
 	{
-		// ¼ì²â°´¼üÏûÏ¢
+		// æ£€æµ‹æŒ‰é”®æ¶ˆæ¯
 	case WM_KEYDOWN:
 		if(wparam == VK_ESCAPE)
 			bexit = true;
 		return 0;
-		//ÈÎºÎÆäËüÏûÏ¢·¢ËÍµ½windowsÈ±Ê¡´¦Àí
+		//ä»»ä½•å…¶å®ƒæ¶ˆæ¯å‘é€åˆ°windowsç¼ºçœå¤„ç†
 	default:
 		return DefWindowProc(hwnd, umsg, wparam, lparam);
 	}

@@ -2,8 +2,8 @@
 
 #include <windows.h>
 
-//Ö÷ÒªÓÃÀ´¼ÆËãÏàÁÚÁ½Ö¡Ö®¼äµÄÊ±¼ä 
-//¿ÉÒÔÓÃÀ´ÊµÏÖÆ½»¬µÄÓëfpsÎÞ¹ØµÄ¶¯»­¡£
+//ä¸»è¦ç”¨æ¥è®¡ç®—ç›¸é‚»ä¸¤å¸§ä¹‹é—´çš„æ—¶é—´ 
+//å¯ä»¥ç”¨æ¥å®žçŽ°å¹³æ»‘çš„ä¸Žfpsæ— å…³çš„åŠ¨ç”»ã€‚
 class TimerClass
 {
 public:

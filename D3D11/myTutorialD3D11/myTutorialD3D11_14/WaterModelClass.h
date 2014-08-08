@@ -34,10 +34,10 @@ private:
 	ID3D11Buffer* m_vertexBuffer, *m_indexBuffer;
 	int m_vertexCount, m_indexCount;
 
-	//¶şÎ¬Íø¸ñµÄĞĞÊı¡¢ÁĞÊı
+	//äºŒç»´ç½‘æ ¼çš„è¡Œæ•°ã€åˆ—æ•°
 	int m_NumRows, m_NumCols;
 
-	// Óû¼ÆËãµÄÄ£Äâ³£Á¿
+	// æ¬²è®¡ç®—çš„æ¨¡æ‹Ÿå¸¸é‡
 	float mK1;
 	float mK2;
 	float mK3;
@@ -48,7 +48,7 @@ private:
 	D3DXVECTOR3* mPrevSolution;
 	D3DXVECTOR3* mCurrSolution;
 
-	//¶¥µãÁÙÊ±»º³å
+	//é¡¶ç‚¹ä¸´æ—¶ç¼“å†²
 	VertexType* vertices;
 };
 

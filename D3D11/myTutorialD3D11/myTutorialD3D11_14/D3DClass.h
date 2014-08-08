@@ -32,19 +32,19 @@ public:
 	bool SetFillMode(D3D11_FILL_MODE);
 
 private:
-	bool m_vsync_enabled;											//ÊÇ·ñÆôÓÃ´¹Ö±Í¬²½
-	int m_videoCardMemory;										//ÏÔ´æ´óĞ¡
-	char m_videoCardDescription[128];						//ÏÔ¿¨Ãû×Ö
-	IDXGISwapChain* m_swapChain;							//½»»»Á´¶ÔÏó
-	ID3D11Device* m_device;										//Éè±¸¶ÔÏó
-	ID3D11DeviceContext* m_deviceContext;			//Éè±¸ÉÏÏÂÎÄ¶ÔÏó
-	ID3D11RenderTargetView* m_renderTargetView;	//äÖÈ¾Ä¿±êÊÓÍ¼
+	bool m_vsync_enabled;											//æ˜¯å¦å¯ç”¨å‚ç›´åŒæ­¥
+	int m_videoCardMemory;										//æ˜¾å­˜å¤§å°
+	char m_videoCardDescription[128];						//æ˜¾å¡åå­—
+	IDXGISwapChain* m_swapChain;							//äº¤æ¢é“¾å¯¹è±¡
+	ID3D11Device* m_device;										//è®¾å¤‡å¯¹è±¡
+	ID3D11DeviceContext* m_deviceContext;			//è®¾å¤‡ä¸Šä¸‹æ–‡å¯¹è±¡
+	ID3D11RenderTargetView* m_renderTargetView;	//æ¸²æŸ“ç›®æ ‡è§†å›¾
 	ID3D11Texture2D* m_depthStencilBuffer;			
 	ID3D11DepthStencilState* m_depthStencilState;
-	ID3D11DepthStencilView* m_depthStencilView;	//Éî¶ÈÄ¿±êÊÓÍ¼
-	ID3D11RasterizerState* m_rasterState;					//äÖÈ¾×´Ì¬
-	D3DXMATRIX m_projectionMatrix;						//Í¶Ó°¾ØÕó
-	D3DXMATRIX m_worldMatrix;								//ÊÀ½ç×ø±êÏµ¾ØÕó
-	D3DXMATRIX m_orthoMatrix;								//Õı½»Í¶Ó°¾ØÕó
+	ID3D11DepthStencilView* m_depthStencilView;	//æ·±åº¦ç›®æ ‡è§†å›¾
+	ID3D11RasterizerState* m_rasterState;					//æ¸²æŸ“çŠ¶æ€
+	D3DXMATRIX m_projectionMatrix;						//æŠ•å½±çŸ©é˜µ
+	D3DXMATRIX m_worldMatrix;								//ä¸–ç•Œåæ ‡ç³»çŸ©é˜µ
+	D3DXMATRIX m_orthoMatrix;								//æ­£äº¤æŠ•å½±çŸ©é˜µ
 };
 

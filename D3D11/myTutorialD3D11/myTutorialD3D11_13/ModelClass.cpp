@@ -20,7 +20,7 @@ bool ModelClass::Initialize(ID3D11Device* device, int m, int n, float dx)
 {
 	bool result;
 
-	// ³õÊ¼»¯¶¥µã»º³åºÍ¶¥µãË÷Òı»º³å
+	// åˆå§‹åŒ–é¡¶ç‚¹ç¼“å†²å’Œé¡¶ç‚¹ç´¢å¼•ç¼“å†²
 	result = InitializeBuffers(device, m, n, dx);
 	if(!result)
 		return false;
@@ -30,19 +30,19 @@ bool ModelClass::Initialize(ID3D11Device* device, int m, int n, float dx)
 
 void ModelClass::ShutDown()
 {
-	// ÊÍ·Å¶¥µãºÍË÷Òı»º³å
+	// é‡Šæ”¾é¡¶ç‚¹å’Œç´¢å¼•ç¼“å†²
 	ShutdownBuffers();
 }
 
 void ModelClass::Render(ID3D11DeviceContext* deviceContext)
 {
-	// °Ñ¶¥µãºÍË÷Òı»º³å·ÅÈëÍ¼ĞÎ¹ÜÏß£¬×¼±¸äÖÈ¾
+	// æŠŠé¡¶ç‚¹å’Œç´¢å¼•ç¼“å†²æ”¾å…¥å›¾å½¢ç®¡çº¿ï¼Œå‡†å¤‡æ¸²æŸ“
 	RenderBuffers(deviceContext);
 }
 
 int ModelClass::GetIndexCount()
 {
-	//·µ»ØË÷Òı¶¥µã¼ÆÊı
+	//è¿”å›ç´¢å¼•é¡¶ç‚¹è®¡æ•°
 	return m_indexCount;
 }
 
@@ -59,11 +59,11 @@ bool ModelClass::InitializeBuffers(ID3D11Device* device, int m, int n, float dx)
 	D3D11_SUBRESOURCE_DATA vertexData, indexData;
 	HRESULT result;
 
-	//Ê×ÏÈµÃµ½Èı½ÇĞÎµÄÊıÄ¿£¬È»ºó³ËÒÔ3¾ÍÊÇ¶¥µãË÷ÒıÊıÄ¿
+	//é¦–å…ˆå¾—åˆ°ä¸‰è§’å½¢çš„æ•°ç›®ï¼Œç„¶åä¹˜ä»¥3å°±æ˜¯é¡¶ç‚¹ç´¢å¼•æ•°ç›®
 	m_vertexCount = m * n;
 	m_indexCount = (m - 1) * (n - 1) * 2 * 3;
 
-	// ´´½¨¶¥µãÁÙÊ±»º³å
+	// åˆ›å»ºé¡¶ç‚¹ä¸´æ—¶ç¼“å†²
 	vertices = new VertexType[m_vertexCount];
 	if(!vertices)
 		return false;
@@ -78,12 +78,12 @@ bool ModelClass::InitializeBuffers(ID3D11Device* device, int m, int n, float dx)
 		{
 			float x = -halfWidth + j * dx;
 
-			 // ¼ÆËãµÃµ½yÖµ
+			 // è®¡ç®—å¾—åˆ°yå€¼
 			float y = getHeight(x, z);
 
 			vertices[i * n + j].position = D3DXVECTOR3(x, y, z);
 
-			// ¸ù¾İ¸ß¶ÈÀ´¶¨ÒåÑÕÉ«
+			// æ ¹æ®é«˜åº¦æ¥å®šä¹‰é¢œè‰²
 			if(y < -10.0f)
 				vertices[i * n + j].color = BEACH_SAND;
 			else if(y < 5.0f)
@@ -97,12 +97,12 @@ bool ModelClass::InitializeBuffers(ID3D11Device* device, int m, int n, float dx)
 		}
 	}
 
-	// ´´½¨Ë÷Òı»º³å
+	// åˆ›å»ºç´¢å¼•ç¼“å†²
 	indices = new unsigned long[m_indexCount];
 	if(!indices)
 		return false;
 
-	// µü´úÃ¿¸ögrid£¬¼ÆËãµÃ³öË÷Òı.
+	// è¿­ä»£æ¯ä¸ªgridï¼Œè®¡ç®—å¾—å‡ºç´¢å¼•.
 	int k = 0;
 	for (int i = 0; i < m - 1; ++i)
 	{
@@ -116,11 +116,11 @@ bool ModelClass::InitializeBuffers(ID3D11Device* device, int m, int n, float dx)
 			indices[k + 4] = i * n + j + 1;
 			indices[k + 5] = (i+1) * n + j + 1;
 
-			k += 6;		//ÏÂÒ»¸ögrid
+			k += 6;		//ä¸‹ä¸€ä¸ªgrid
 		}
 	}
 
-	// ÉèÖÃ¶¥µã»º³åÃèÊö
+	// è®¾ç½®é¡¶ç‚¹ç¼“å†²æè¿°
 	vertexBufferDesc.Usage = D3D11_USAGE_DEFAULT;
 	vertexBufferDesc.ByteWidth = sizeof(VertexType) * m_vertexCount;
 	vertexBufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
@@ -128,12 +128,12 @@ bool ModelClass::InitializeBuffers(ID3D11Device* device, int m, int n, float dx)
 	vertexBufferDesc.MiscFlags = 0;
 	vertexBufferDesc.StructureByteStride = 0;
 
-	// Ö¸Ïò±£´æ¶¥µãÊı¾İµÄÁÙÊ±»º³å
+	// æŒ‡å‘ä¿å­˜é¡¶ç‚¹æ•°æ®çš„ä¸´æ—¶ç¼“å†²
 	vertexData.pSysMem = vertices;
 	vertexData.SysMemPitch = 0;
 	vertexData.SysMemSlicePitch = 0;
 
-	// ´´½¨¶¥µã»º³å
+	// åˆ›å»ºé¡¶ç‚¹ç¼“å†²
 	result = device->CreateBuffer(&vertexBufferDesc, &vertexData, &m_vertexBuffer);
 	if(FAILED(result))
 	{
@@ -141,7 +141,7 @@ bool ModelClass::InitializeBuffers(ID3D11Device* device, int m, int n, float dx)
 		return false;
 	}
 
-	// ÉèÖÃË÷Òı»º³åÃèÊö
+	// è®¾ç½®ç´¢å¼•ç¼“å†²æè¿°
 	indexBufferDesc.Usage = D3D11_USAGE_DEFAULT;
 	indexBufferDesc.ByteWidth = sizeof(unsigned long) * m_indexCount;
 	indexBufferDesc.BindFlags = D3D11_BIND_INDEX_BUFFER;
@@ -149,12 +149,12 @@ bool ModelClass::InitializeBuffers(ID3D11Device* device, int m, int n, float dx)
 	indexBufferDesc.MiscFlags = 0;
 	indexBufferDesc.StructureByteStride = 0;
 
-	 // Ö¸Ïò´æÁÙÊ±Ë÷Òı»º³å
+	 // æŒ‡å‘å­˜ä¸´æ—¶ç´¢å¼•ç¼“å†²
 	indexData.pSysMem = indices;
 	indexData.SysMemPitch = 0;
 	indexData.SysMemSlicePitch = 0;
 
-	// ´´½¨Ë÷Òı»º³å
+	// åˆ›å»ºç´¢å¼•ç¼“å†²
 	result = device->CreateBuffer(&indexBufferDesc, &indexData, &m_indexBuffer);
 	if(FAILED(result))
 	{
@@ -162,7 +162,7 @@ bool ModelClass::InitializeBuffers(ID3D11Device* device, int m, int n, float dx)
 		return false;
 	}
 
-	// ÊÍ·ÅÁÙÊ±»º³å
+	// é‡Šæ”¾ä¸´æ—¶ç¼“å†²
 	delete[] vertices;
 	vertices = nullptr;
 
@@ -174,14 +174,14 @@ bool ModelClass::InitializeBuffers(ID3D11Device* device, int m, int n, float dx)
 
 void ModelClass::ShutdownBuffers()
 {
-	// ÊÍ·Å¶¥µã»º³å
+	// é‡Šæ”¾é¡¶ç‚¹ç¼“å†²
 	if(m_indexBuffer)
 	{
 		m_indexBuffer->Release();
 		m_indexBuffer = nullptr;
 	}
 
-	// ÊÍ·ÅË÷Òı»º³å
+	// é‡Šæ”¾ç´¢å¼•ç¼“å†²
 	if(m_vertexBuffer)
 	{
 		m_vertexBuffer->Release();
@@ -193,16 +193,16 @@ void ModelClass::RenderBuffers(ID3D11DeviceContext* deviceContext)
 {
 	unsigned int stride, offset;
 
-	// ÉèÖÃ¶¥µã»º³å¿ç¶ÈºÍÆ«ÒÆ
+	// è®¾ç½®é¡¶ç‚¹ç¼“å†²è·¨åº¦å’Œåç§»
 	stride = sizeof(VertexType);
 	offset = 0;
 
-	//ÔÚinput assemberl½×¶Î°ó¶¨¶¥µã»º³å£¬ÒÔ±ãÄÜ¹»±»äÖÈ¾
+	//åœ¨input assemberlé˜¶æ®µç»‘å®šé¡¶ç‚¹ç¼“å†²ï¼Œä»¥ä¾¿èƒ½å¤Ÿè¢«æ¸²æŸ“
 	deviceContext->IASetVertexBuffers(0, 1, &m_vertexBuffer, &stride, &offset);
 
-	//ÔÚinput assemberl½×¶Î°ó¶¨Ë÷Òı»º³å£¬ÒÔ±ãÄÜ¹»±»äÖÈ¾
+	//åœ¨input assemberlé˜¶æ®µç»‘å®šç´¢å¼•ç¼“å†²ï¼Œä»¥ä¾¿èƒ½å¤Ÿè¢«æ¸²æŸ“
 	deviceContext->IASetIndexBuffer(m_indexBuffer, DXGI_FORMAT_R32_UINT, 0);
 
-	// ÉèÖÃÌåÔªÓïÒå£¬äÖÈ¾Èı½ÇĞÎÁĞ±í
+	// è®¾ç½®ä½“å…ƒè¯­ä¹‰ï¼Œæ¸²æŸ“ä¸‰è§’å½¢åˆ—è¡¨
 	deviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 }

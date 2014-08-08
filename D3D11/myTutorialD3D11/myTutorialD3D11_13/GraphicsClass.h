@@ -2,10 +2,10 @@
 
 #include <windows.h>
 
-const bool FULL_SCREEN = false;			//ÊÇ·ñÈ«ÆÁ
-const bool VSYNC_ENABLED = true;	//ÊÇ·ñ´¹Ö±Í¬²½
-const float SCREEN_DEPTH = 1000.0f;	//Éî¶È£¬Ô¶µã
-const float SCREEN_NEAR = 1.0f;			//Éî¶È£¬½üµã
+const bool FULL_SCREEN = false;			//æ˜¯å¦å…¨å±
+const bool VSYNC_ENABLED = true;	//æ˜¯å¦å‚ç›´åŒæ­¥
+const float SCREEN_DEPTH = 1000.0f;	//æ·±åº¦ï¼Œè¿œç‚¹
+const float SCREEN_NEAR = 1.0f;			//æ·±åº¦ï¼Œè¿‘ç‚¹
 
 class D3DClass;
 class CameraClass;
@@ -28,10 +28,10 @@ private:
 	bool Render();
 
 public:
-	CameraClass* m_Camera;		//ÉèÎªpublic£¬±ãÓÚÔÚSystemClassÖĞ¿ØÖÆ
+	CameraClass* m_Camera;		//è®¾ä¸ºpublicï¼Œä¾¿äºåœ¨SystemClassä¸­æ§åˆ¶
 
 private:
-	D3DClass* m_D3D;				//¶¨ÒåÒ»¸öD3DClassÀà³ÉÔ±±äÁ¿
+	D3DClass* m_D3D;				//å®šä¹‰ä¸€ä¸ªD3DClassç±»æˆå‘˜å˜é‡
 	ModelClass* m_Model;
 	AxisModelClass* m_AxisModel;
 	ColorShaderClass* m_ColorShader;

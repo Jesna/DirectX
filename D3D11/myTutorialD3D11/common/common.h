@@ -1,6 +1,6 @@
 #pragma once
 
-//¶¨ÒåÒ»Ğ©³£ÓÃÑÕÉ«
+//å®šä¹‰ä¸€äº›å¸¸ç”¨é¢œè‰²
 #include <d3d11.h>
 #include <D3DX10math.h>
 
@@ -18,7 +18,7 @@
 #include <DxErr.h>
 #include <cassert>
 
-//Ò»¸ö¼òµ¥µÄ´íÎó¼ì²âºê
+//ä¸€ä¸ªç®€å•çš„é”™è¯¯æ£€æµ‹å®
 #if defined(DEBUG) || defined(_DEBUG)
 	#pragma comment(lib, "dxerr.lib")
 	#ifndef HR
@@ -43,8 +43,8 @@ const D3DXVECTOR4 RED(1.0f, 0.0f, 0.0f, 1.0f);
 const D3DXVECTOR4 GREEN(0.0f, 1.0f, 0.0f, 1.0f);
 const D3DXVECTOR4 BLUE(0.0f, 0.0f, 1.0f, 1.0f);
 const D3DXVECTOR4 YELLOW(1.0f, 1.0f, 0.0f, 1.0f);
-const D3DXVECTOR4 CYAN(0.0f, 1.0f, 1.0f, 1.0f); //À¶ÂÌÉ«
-const D3DXVECTOR4 MAGENTA(1.0f, 0.0f, 1.0f, 1.0f);//ÑóºìÉ«
+const D3DXVECTOR4 CYAN(0.0f, 1.0f, 1.0f, 1.0f); //è“ç»¿è‰²
+const D3DXVECTOR4 MAGENTA(1.0f, 0.0f, 1.0f, 1.0f);//æ´‹çº¢è‰²
 
 const D3DXVECTOR4 BEACH_SAND(1.0f, 0.96f, 0.62f, 1.0f);
 const D3DXVECTOR4 LIGHT_YELLOW_GREEN(0.48f, 0.77f, 0.46f, 1.0f);

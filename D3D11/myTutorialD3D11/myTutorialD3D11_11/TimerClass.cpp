@@ -15,12 +15,12 @@ TimerClass::~TimerClass(void)
 
 bool TimerClass::Initialize()
 {
-	// ¼ì²âÏµÍ³ÊÇ·ñÖ§³Ö¸ß¾«¶È¼ÆÊ±Æ÷.
+	// æ£€æµ‹ç³»ç»Ÿæ˜¯å¦æ”¯æŒé«˜ç²¾åº¦è®¡æ—¶å™¨.
 	QueryPerformanceFrequency((LARGE_INTEGER*)&m_frequency);
 	if(m_frequency == 0)
 		return false;
 
-	// µÃµ½Ã¿ºÁÃë¶àÉÙ¸ö¼ÆÊıÆ÷.
+	// å¾—åˆ°æ¯æ¯«ç§’å¤šå°‘ä¸ªè®¡æ•°å™¨.
 	m_ticksPerMs = (float)(m_frequency / 1000);
 
 	QueryPerformanceCounter((LARGE_INTEGER*)&m_startTime);
@@ -28,7 +28,7 @@ bool TimerClass::Initialize()
 	return true;
 }
 
-//Ã¿¸öäÖÈ¾Ö¡¶¼»á±»µ÷ÓÃ£¬´Ó¶ø¼ÆËã³öÃ¿Ö¡Ö®¼äµÄÊ±¼ä
+//æ¯ä¸ªæ¸²æŸ“å¸§éƒ½ä¼šè¢«è°ƒç”¨ï¼Œä»è€Œè®¡ç®—å‡ºæ¯å¸§ä¹‹é—´çš„æ—¶é—´
 void TimerClass::Frame()
 {
 	INT64 currentTime;

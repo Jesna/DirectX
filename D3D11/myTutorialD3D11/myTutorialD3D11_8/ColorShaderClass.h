@@ -7,7 +7,7 @@
 class ColorShaderClass
 {
 private:
-	//ºÍshaderÖĞconst buffer½á¹¹Ò»ÖÂ£¬Ö÷ÒªÓÃÀ´¸øÕâĞ©shader²ÎÊı¸³Öµ¡£
+	//å’Œshaderä¸­const bufferç»“æ„ä¸€è‡´ï¼Œä¸»è¦ç”¨æ¥ç»™è¿™äº›shaderå‚æ•°èµ‹å€¼ã€‚
 	struct MatrixBufferType
 	{
 		D3DXMATRIX world;

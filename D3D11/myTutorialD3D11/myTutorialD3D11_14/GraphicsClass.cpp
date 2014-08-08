@@ -29,15 +29,15 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 {
 	bool result;
 
-	//Èç¹û¶ÔÏóÒÑ¾­´æÔÚ£¬ÏÈÊÍ·ÅµôËüÃÇ
+	//å¦‚æœå¯¹è±¡å·²ç»å­˜åœ¨ï¼Œå…ˆé‡Šæ”¾æ‰å®ƒä»¬
 	ShutDown();
 
-	// ´´½¨Ò»¸öD3DClass¶ÔÏó
+	// åˆ›å»ºä¸€ä¸ªD3DClasså¯¹è±¡
 	m_D3D = new D3DClass;
 	if(!m_D3D)
 		return false;
 
-	// µ÷ÓÃD3DClass³õÊ¼»¯º¯Êı 
+	// è°ƒç”¨D3DClassåˆå§‹åŒ–å‡½æ•° 
 	result = m_D3D->Initialize(screenWidth, screenHeight, VSYNC_ENABLED, hwnd, FULL_SCREEN, 
 		SCREEN_DEPTH, SCREEN_NEAR);
 	if(!result)
@@ -46,21 +46,21 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 		return false; 
 	}
 
-	//´´½¨ÉãÏñ»ú¶ÔÏó
+	//åˆ›å»ºæ‘„åƒæœºå¯¹è±¡
 	m_Camera = new CameraClass;
 	if(!m_Camera)
 		return false;
 
-	// ÉèÖÃÉãÏñ»úÎ»ÖÃ
+	// è®¾ç½®æ‘„åƒæœºä½ç½®
 	D3DXVECTOR3 campos = D3DXVECTOR3(0.0f, 0.0f, -10.0f);
 	m_Camera->setPosition(&campos);
 
-	// ´´½¨Ä£ĞÍ¶ÔÏó
+	// åˆ›å»ºæ¨¡å‹å¯¹è±¡
 	m_Model = new ModelClass;
 	if(!m_Model)
 		return false;
 
-	// ³õÊ¼»¯Ä£ĞÍ¶ÔÏó
+	// åˆå§‹åŒ–æ¨¡å‹å¯¹è±¡
 	result = m_Model->Initialize(m_D3D->GetDevice(), 300, 300, 1.0f);
 	if(!result)
 	{
@@ -68,12 +68,12 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 		return false;
 	}
 
-	// ´´½¨ÖáÄ£ĞÍ¶ÔÏó
+	// åˆ›å»ºè½´æ¨¡å‹å¯¹è±¡
 	m_AxisModel = new AxisModelClass;
 	if(!m_AxisModel)
 		return false;
 
-	// ³õÊ¼»¯×ø±êÖáÄ£ĞÍ¶ÔÏó
+	// åˆå§‹åŒ–åæ ‡è½´æ¨¡å‹å¯¹è±¡
 	result = m_AxisModel->Initialize(m_D3D->GetDevice());
 	if(!result)
 	{
@@ -81,12 +81,12 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 		return false;
 	}
 
-	// ´´½¨Ë®Ä£ĞÍ¶ÔÏó
+	// åˆ›å»ºæ°´æ¨¡å‹å¯¹è±¡
 	/*m_WaterModel = new WaterModelClass;
 	if(!m_WaterModel)
 		return false;
 
-	// ³õÊ¼»¯Ë®Ä£ĞÍ¶ÔÏó
+	// åˆå§‹åŒ–æ°´æ¨¡å‹å¯¹è±¡
 	result = m_WaterModel->Initialize(m_D3D->GetDevice(), 257, 257, 0.5f, 0.03f, 3.25f, 0.4f);
 	if(!result)
 	{
@@ -94,12 +94,12 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 		return false;
 	}*/
 
-	// ´´½¨shader¶ÔÏó
+	// åˆ›å»ºshaderå¯¹è±¡
 	m_ColorShader = new ColorShaderClass;
 	if(!m_ColorShader)
 		return false;
 
-	// ³õÊ¼»¯shader¶ÔÏó
+	// åˆå§‹åŒ–shaderå¯¹è±¡
 	result = m_ColorShader->Initialize(m_D3D->GetDevice(), hwnd);
 	if(!result)
 	{
@@ -112,7 +112,7 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 
 void GraphicsClass::ShutDown()
 {
-	// ÊÍ·Åshader¶ÔÏó
+	// é‡Šæ”¾shaderå¯¹è±¡
 	if(m_ColorShader)
 	{
 		m_ColorShader->Shutdown();
@@ -120,7 +120,7 @@ void GraphicsClass::ShutDown()
 		m_ColorShader = nullptr;
 	}
 
-	// ÊÍ·ÅÄ£ĞÍ¶ÔÏó
+	// é‡Šæ”¾æ¨¡å‹å¯¹è±¡
 	if(m_Model)
 	{
 		m_Model->ShutDown();
@@ -128,7 +128,7 @@ void GraphicsClass::ShutDown()
 		m_Model = nullptr;
 	}
 
-	// ÊÍ·Å×ø±êÖáÄ£ĞÍ¶ÔÏó
+	// é‡Šæ”¾åæ ‡è½´æ¨¡å‹å¯¹è±¡
 	if(m_AxisModel)
 	{
 		m_AxisModel->Shutdown();
@@ -136,7 +136,7 @@ void GraphicsClass::ShutDown()
 		m_AxisModel = nullptr;
 	}
 
-	// ÊÍ·ÅË®Ä£ĞÍ¶ÔÏó.
+	// é‡Šæ”¾æ°´æ¨¡å‹å¯¹è±¡.
 	if(m_WaterModel)
 	{
 		m_WaterModel->Shutdown();
@@ -144,14 +144,14 @@ void GraphicsClass::ShutDown()
 		m_WaterModel = nullptr;
 	}
 
-	// ÊÍ·ÅÉãÏñ»ú¶ÔÏó
+	// é‡Šæ”¾æ‘„åƒæœºå¯¹è±¡
 	if(m_Camera)
 	{
 		delete m_Camera;
 		m_Camera = nullptr;
 	}
 
-	//Ïú»Ùm_D3D¶ÔÏó 
+	//é”€æ¯m_D3Då¯¹è±¡ 
 	if(m_D3D)
 	{
 		m_D3D->ShutDown();
@@ -162,7 +162,7 @@ void GraphicsClass::ShutDown()
 
 bool GraphicsClass::Frame(float dt)
 {
-	//µ÷ÓÃRenderº¯Êı£¬äÖÈ¾3D³¡¾°
+	//è°ƒç”¨Renderå‡½æ•°ï¼Œæ¸²æŸ“3Dåœºæ™¯
 	bool result = Render(dt);
 	if(!result)
 		return false;
@@ -175,28 +175,28 @@ bool GraphicsClass::Render(float dt)
 	D3DXMATRIX viewMatrix, projectionMatrix, worldMatrix;
 	bool result;
 
-	// ÉèÖÃframebuffer.ÎªÇ³À¶É«
+	// è®¾ç½®framebuffer.ä¸ºæµ…è“è‰²
 	m_D3D->BeginScene(0.0f, 0.0f, 0.5f, 1.0f);
 
-	// µÃµ½3¸ö¾ØÕó
+	// å¾—åˆ°3ä¸ªçŸ©é˜µ
 	m_Camera->getViewMatrix(&viewMatrix);
 	m_D3D->GetWorldMatrix(worldMatrix);
 	m_D3D->GetProjectionMatrix(projectionMatrix);
 
-	//ÉèÖÃÎªÊµÌåÌî³äÄ£Ê½
+	//è®¾ç½®ä¸ºå®ä½“å¡«å……æ¨¡å¼
 	m_D3D->SetFillMode(D3D11_FILL_SOLID);
 
 	m_AxisModel->Render(m_D3D->GetDeviceContext());
-	// ÓÃshaderäÖÈ¾
+	// ç”¨shaderæ¸²æŸ“
 	result = m_ColorShader->Render(m_D3D->GetDeviceContext(), m_AxisModel->GetIndexCount(), 
 		worldMatrix, viewMatrix, projectionMatrix);
 	if(!result)
 		return false;
 
-	// °ÑÄ£ĞÍ¶¥µãºÍË÷Òı»º³å·ÅÈë¹ÜÏß£¬×¼±¸äÖÈ¾
+	// æŠŠæ¨¡å‹é¡¶ç‚¹å’Œç´¢å¼•ç¼“å†²æ”¾å…¥ç®¡çº¿ï¼Œå‡†å¤‡æ¸²æŸ“
 	m_Model->Render(m_D3D->GetDeviceContext());
 
-	// ÓÃshaderäÖÈ¾
+	// ç”¨shaderæ¸²æŸ“
 	result = m_ColorShader->Render(m_D3D->GetDeviceContext(), m_Model->GetIndexCount(), 
 		worldMatrix, viewMatrix, projectionMatrix);
 	if(!result)
@@ -212,7 +212,7 @@ bool GraphicsClass::Render(float dt)
 		int i = 5 + rand() % 250;
 		int j = 5 + rand() % 250;
 
-		//µÃµ½1µ½2Ö®¼äµÄÒ»¸ö¸¡µãÊı
+		//å¾—åˆ°1åˆ°2ä¹‹é—´çš„ä¸€ä¸ªæµ®ç‚¹æ•°
 		float r = 1.0 + (float)(rand()) / (float)RAND_MAX * (2.0f - 1.0f);
 
 		m_WaterModel->disturb(i, j, r);
@@ -220,19 +220,19 @@ bool GraphicsClass::Render(float dt)
 
 	m_WaterModel->update(m_D3D->GetDeviceContext(), dt);
 
-	//ÉèÖÃÏß¿òÄ£Ê½
+	//è®¾ç½®çº¿æ¡†æ¨¡å¼
 	m_D3D->SetFillMode(D3D11_FILL_WIREFRAME);
 
-	// °ÑÄ£ĞÍ¶¥µãºÍË÷Òı»º³å·ÅÈë¹ÜÏß£¬×¼±¸äÖÈ¾.
+	// æŠŠæ¨¡å‹é¡¶ç‚¹å’Œç´¢å¼•ç¼“å†²æ”¾å…¥ç®¡çº¿ï¼Œå‡†å¤‡æ¸²æŸ“.
 	m_WaterModel->Render(m_D3D->GetDeviceContext());
 
-	// ÓÃshaderäÖÈ¾
+	// ç”¨shaderæ¸²æŸ“
 	result = m_ColorShader->Render(m_D3D->GetDeviceContext(), m_WaterModel->GetIndexCount(), 
 		worldMatrix, viewMatrix, projectionMatrix);
 	if(!result)
 		return false;*/
 
-	//°ÑframebufferÖĞµÄÍ¼Ïñpresentµ½ÆÁÄ»ÉÏ
+	//æŠŠframebufferä¸­çš„å›¾åƒpresentåˆ°å±å¹•ä¸Š
 	m_D3D->EndScene();
 
 	return true;

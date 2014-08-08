@@ -15,20 +15,20 @@ InputClass::~InputClass(void)
 
 void InputClass::Initialize()
 {
-	//³õÊ¼ËùÓĞµÄ¼ü¶¼ÊÇ·Ç°´ÏÂ×´Ì¬
+	//åˆå§‹æ‰€æœ‰çš„é”®éƒ½æ˜¯éæŒ‰ä¸‹çŠ¶æ€
 	for each (bool& var in m_keys)
 		var = false;
 }
 
 void InputClass::KeyDown(unsigned int input)
 {
-	//¼ü±»°´ÏÂ
+	//é”®è¢«æŒ‰ä¸‹
 	m_keys[input] = true;
 }
 
 void InputClass::KeyUp(unsigned int input)
 {
-	//ÊÍ·Å°´¼ü
+	//é‡Šæ”¾æŒ‰é”®
 	m_keys[input] = false;
 }
 

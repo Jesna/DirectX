@@ -52,10 +52,10 @@ void CameraClass::getLook(D3DXVECTOR3* look)
 	*look = _look;
 }
 
-//ĞĞ×ß£¬ÑØ×ÅÉãÏñ»ú¹Û²ì·½ÏòµÄÒÆ¶¯
+//è¡Œèµ°ï¼Œæ²¿ç€æ‘„åƒæœºè§‚å¯Ÿæ–¹å‘çš„ç§»åŠ¨
 void CameraClass::walk(float units)
 {
-	// ½öÔÚx,zÆ½ÃæÒÆ¶¯
+	// ä»…åœ¨x,zå¹³é¢ç§»åŠ¨
 	if(_cameraType == LANDOBJECT)
 		_pos += D3DXVECTOR3(_look.x, 0.0f, _look.z) * units;
 
@@ -63,10 +63,10 @@ void CameraClass::walk(float units)
 		_pos += _look * units;
 }
 
-//É¨ÊÓ£¬ÊÇÖ¸±£³Ö¹Û²ì·½Ïò²»±ä£¬ÑØÏòÁ¿right·½Ïò´ÓÒ»±ßÆ½ÒÆµ½ÁíÒ»±ß
+//æ‰«è§†ï¼Œæ˜¯æŒ‡ä¿æŒè§‚å¯Ÿæ–¹å‘ä¸å˜ï¼Œæ²¿å‘é‡rightæ–¹å‘ä»ä¸€è¾¹å¹³ç§»åˆ°å¦ä¸€è¾¹
 void CameraClass::strafe(float units)
 {
-	// ½öÔÚx,zÆ½ÃæÒÆ¶¯
+	// ä»…åœ¨x,zå¹³é¢ç§»åŠ¨
 	if(_cameraType == LANDOBJECT)
 		_pos += D3DXVECTOR3(_right.x, 0.0f, _right.z) * units;
 
@@ -74,10 +74,10 @@ void CameraClass::strafe(float units)
 		_pos += _right * units;
 }
 
-//·ÉĞĞÄ£Ê½£¬Éı½µ£¬Ö¸ÑØ×ÅÏòÁ¿up·½ÏòµÄÒÆ¶¯
+//é£è¡Œæ¨¡å¼ï¼Œå‡é™ï¼ŒæŒ‡æ²¿ç€å‘é‡upæ–¹å‘çš„ç§»åŠ¨
 void CameraClass::fly(float units)
 {
-	// ½öÔÚyÖáÒÆ¶¯
+	// ä»…åœ¨yè½´ç§»åŠ¨
 	if(_cameraType == LANDOBJECT)
 		_pos.y += units;
 
@@ -90,7 +90,7 @@ void CameraClass::pitch(float angle)
 	D3DXMATRIX T;
 	D3DXMatrixRotationAxis(&T, &_right, angle);
 
-	// ÈÆ×ÅrightÏòÁ¿£¬Ğı×ªupºÍlook
+	// ç»•ç€rightå‘é‡ï¼Œæ—‹è½¬upå’Œlook
 	D3DXVec3TransformCoord(&_up, &_up, &T);
 	D3DXVec3TransformCoord(&_look, &_look, &T);
 }
@@ -99,28 +99,28 @@ void CameraClass::yaw(float angle)
 {
 	D3DXMATRIX T;
 
-	//¶ÔLANDOBJECT,×ÜÊÇÈÆ×Å(0,1,0)Ğı×ª¡£
+	//å¯¹LANDOBJECT,æ€»æ˜¯ç»•ç€(0,1,0)æ—‹è½¬ã€‚
 	if(_cameraType == LANDOBJECT)
 		D3DXMatrixRotationY(&T, angle);
 
-	//¶ÔÓÚaircraft,ÈÆ×ÅupÏòÁ¿Ğı×ª
+	//å¯¹äºaircraft,ç»•ç€upå‘é‡æ—‹è½¬
 	if(_cameraType == AIRCRAFT)
 		D3DXMatrixRotationAxis(&T, &_up, angle);
 
-	// ÈÆ×Åup»òÕßyÖá£¬Ğı×ªrightºÍlook
+	// ç»•ç€upæˆ–è€…yè½´ï¼Œæ—‹è½¬rightå’Œlook
 	D3DXVec3TransformCoord(&_right, &_right, &T);
 	D3DXVec3TransformCoord(&_look, &_look, &T);
 }
 
 void CameraClass::roll(float angle)
 {
-	//Ö»¶ÔaircraftÄ£Ê½²Å×órollĞı×ª
+	//åªå¯¹aircraftæ¨¡å¼æ‰å·¦rollæ—‹è½¬
 	if(_cameraType == AIRCRAFT)
 	{
 		D3DXMATRIX T;
 		D3DXMatrixRotationAxis(&T, &_look, angle);
 
-		// ÈÆ×ÅlookÏòÁ¿£¬Ğı×ªupºÍright
+		// ç»•ç€lookå‘é‡ï¼Œæ—‹è½¬upå’Œright
 		D3DXVec3TransformCoord(&_right, &_right, &T);
 		D3DXVec3TransformCoord(&_up, &_up, &T);
 	}
@@ -128,7 +128,7 @@ void CameraClass::roll(float angle)
 
 void CameraClass::getViewMatrix(D3DXMATRIX* V)
 {
-	// ±£³Öview¾Ö²¿×ø±êÏµ£¬¸÷ÖáµÄ±Ë´ËÕı½»
+	// ä¿æŒviewå±€éƒ¨åæ ‡ç³»ï¼Œå„è½´çš„å½¼æ­¤æ­£äº¤
 	D3DXVec3Normalize(&_look, &_look);
 
 	// look X right
@@ -138,7 +138,7 @@ void CameraClass::getViewMatrix(D3DXMATRIX* V)
 	D3DXVec3Cross(&_right, &_up, &_look);
 	D3DXVec3Normalize(&_right, &_right);
 
-	// Éú³Éview¾ØÕó:
+	// ç”ŸæˆviewçŸ©é˜µ:
 	float x = -D3DXVec3Dot(&_right, &_pos);
 	float y = -D3DXVec3Dot(&_up, &_pos);
 	float z = -D3DXVec3Dot(&_look, &_pos);

@@ -19,12 +19,12 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 {
 	bool result;
 
-	// ´´½¨Ò»¸öD3DClass¶ÔÏó
+	// åˆ›å»ºä¸€ä¸ªD3DClasså¯¹è±¡
 	m_D3D = new D3DClass;
 	if(!m_D3D)
 		return false;
 
-	// µ÷ÓÃD3DClass³õÊ¼»¯º¯Êı 
+	// è°ƒç”¨D3DClassåˆå§‹åŒ–å‡½æ•° 
 	result = m_D3D->Initialize(screenWidth, screenHeight, VSYNC_ENABLED, hwnd, FULL_SCREEN, 
 		SCREEN_DEPTH, SCREEN_NEAR);
 	if(!result)
@@ -38,7 +38,7 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 
 void GraphicsClass::ShutDown()
 {
-	//Ïú»Ùm_D3D¶ÔÏó 
+	//é”€æ¯m_D3Då¯¹è±¡ 
 	if(m_D3D)
 	{
 		m_D3D->ShutDown();
@@ -49,7 +49,7 @@ void GraphicsClass::ShutDown()
 
 bool GraphicsClass::Frame()
 {
-	//µ÷ÓÃRenderº¯Êı£¬äÖÈ¾3D³¡¾°
+	//è°ƒç”¨Renderå‡½æ•°ï¼Œæ¸²æŸ“3Dåœºæ™¯
 	bool result = Render();
 	if(!result)
 		return false;
@@ -59,10 +59,10 @@ bool GraphicsClass::Frame()
 
 bool GraphicsClass::Render()
 {
-	// ÉèÖÃframebuffer.ÎªÇ³À¶É«
+	// è®¾ç½®framebuffer.ä¸ºæµ…è“è‰²
 	m_D3D->BeginScene(0.0f, 0.0f, 0.5f, 1.0f);
 
-	//°ÑframebufferÖĞµÄÍ¼Ïñpresentµ½ÆÁÄ»ÉÏ
+	//æŠŠframebufferä¸­çš„å›¾åƒpresentåˆ°å±å¹•ä¸Š
 	m_D3D->EndScene();
 
 	return true;

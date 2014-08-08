@@ -50,37 +50,37 @@ void CameraClass::Render()
 	float yaw, pitch, roll;
 	D3DXMATRIX rotationMatrix;
 
-	// ÉèÖÃupÏòÁ¿Îª(0,1,0)
+	// è®¾ç½®upå‘é‡ä¸º(0,1,0)
 	up.x = 0.0f;
 	up.y = 1.0f;
 	up.z = 0.0f;
 
-	// ÉèÖÃÉãÏñ»úµÄÎ»ÖÃ
+	// è®¾ç½®æ‘„åƒæœºçš„ä½ç½®
 	position.x = m_positionX;
 	position.y = m_positionY;
 	position.z = m_positionZ;
 
-	// ÉèÖÃÉãÏñ»úlookatµÄ·½Ïò
+	// è®¾ç½®æ‘„åƒæœºlookatçš„æ–¹å‘
 	lookAt.x = 0.0f;
 	lookAt.y = 0.0f;
 	lookAt.z = 1.0f;
 
-	// µÃµ½»¡¶Èµ¥Î»µÄÅ·À­Ğı×ª yaw (Y axis), pitch (X axis), ÒÔ¼° roll (Z axis)
+	// å¾—åˆ°å¼§åº¦å•ä½çš„æ¬§æ‹‰æ—‹è½¬ yaw (Y axis), pitch (X axis), ä»¥åŠ roll (Z axis)
 	pitch = m_rotationX * 0.0174532925f;
 	yaw = m_rotationY * 0.0174532925f;
 	roll = m_rotationZ * 0.0174532925f;
 
-	// µÃµ½Ğı×ª¾ØÕó
+	// å¾—åˆ°æ—‹è½¬çŸ©é˜µ
 	D3DXMatrixRotationYawPitchRoll(&rotationMatrix, yaw, pitch, roll);
 
-	// ±ä»»lookatºÍupÏòÁ¿£¬Ò»°ãviewÄÜ¹»ÔÚÔ­µã±»ÕıÈ·Ğı×ª
+	// å˜æ¢lookatå’Œupå‘é‡ï¼Œä¸€èˆ¬viewèƒ½å¤Ÿåœ¨åŸç‚¹è¢«æ­£ç¡®æ—‹è½¬
 	D3DXVec3TransformCoord(&lookAt, &lookAt, &rotationMatrix);
 	D3DXVec3TransformCoord(&up, &up, &rotationMatrix);
 
-	// Æ½ÒÆĞı×ªºóµÄÉãÏñ»úÎ»ÖÃ
+	// å¹³ç§»æ—‹è½¬åçš„æ‘„åƒæœºä½ç½®
 	lookAt = position + lookAt;
 
-	// ´´½¨view¾ØÕó
+	// åˆ›å»ºviewçŸ©é˜µ
 	D3DXMatrixLookAtLH(&m_viewMatrix, &position, &lookAt, &up);
 }
 

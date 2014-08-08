@@ -19,8 +19,8 @@ public:
 	void GetViewMatrix(D3DXMATRIX&);
 
 private:
-	float m_positionX, m_positionY, m_positionZ;	//ÉãÏñ»úÔÚÊÀ½ç×ø±êÏµÖĞµÄÎ»ÖÃ
-	float m_rotationX, m_rotationY, m_rotationZ;	//ÉãÏñ»úµÄÅ·À­Ğı×ª½Ç¶È
+	float m_positionX, m_positionY, m_positionZ;	//æ‘„åƒæœºåœ¨ä¸–ç•Œåæ ‡ç³»ä¸­çš„ä½ç½®
+	float m_rotationX, m_rotationY, m_rotationZ;	//æ‘„åƒæœºçš„æ¬§æ‹‰æ—‹è½¬è§’åº¦
 	D3DXMATRIX m_viewMatrix;
 };
 

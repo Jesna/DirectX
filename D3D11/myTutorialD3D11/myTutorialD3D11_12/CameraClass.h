@@ -4,8 +4,8 @@
 
 class CameraClass
 {
-	//Ö§³ÖÁ½ÖÖÉãÏñ»úÄ£ĞÍ AIRCRAFT ÔÊĞíÔÚ¿Õ¼ä×ÔÓÉÔË¶¯,¾ßÓĞ6¸ö×ÔÓÉ¶È 
-	// LANDOBJECT ÑØÄ³Ğ©ÌØ¶¨Öá½øĞĞÒÆ¶¯
+	//æ”¯æŒä¸¤ç§æ‘„åƒæœºæ¨¡å‹ AIRCRAFT å…è®¸åœ¨ç©ºé—´è‡ªç”±è¿åŠ¨,å…·æœ‰6ä¸ªè‡ªç”±åº¦ 
+	// LANDOBJECT æ²¿æŸäº›ç‰¹å®šè½´è¿›è¡Œç§»åŠ¨
 public:
 	enum CameraType { LANDOBJECT, AIRCRAFT };
 
@@ -14,13 +14,13 @@ public:
 	CameraClass(const CameraClass&);
 	~CameraClass(void);
 
-	void strafe(float units);		//×óÓÒÒÆ¶¯
-	void fly(float units);			//ÉÏÏÂÒÆ¶¯
-	void walk(float units);		//Ç°ºóÒÆ¶¯
+	void strafe(float units);		//å·¦å³ç§»åŠ¨
+	void fly(float units);			//ä¸Šä¸‹ç§»åŠ¨
+	void walk(float units);		//å‰åç§»åŠ¨
 
-	void pitch(float angle);		// Ğı×ªview×ø±êÏµrightÏòÁ¿
-	void yaw(float angle);		// Ğı×ªupÏòÁ¿
-	void roll(float angle);			// Ğı×ªlookÏòÁ¿
+	void pitch(float angle);		// æ—‹è½¬viewåæ ‡ç³»rightå‘é‡
+	void yaw(float angle);		// æ—‹è½¬upå‘é‡
+	void roll(float angle);			// æ—‹è½¬lookå‘é‡
 
 	void getViewMatrix(D3DXMATRIX* V);
 	void setCameraType(CameraType cameraType);
